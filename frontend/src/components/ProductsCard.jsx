@@ -3,6 +3,8 @@ import Button from './Button'
 import { useNavigate } from "react-router-dom";
 import { cartContext } from './cartContext';
 import { ToastContainer, toast, Slide, Bounce } from 'react-toastify';
+
+import { CartContext } from "./Features/ContexProvider.jsx";
 function ProductsCard({ data }) {
   // const navigate = useNavigate()
 
@@ -12,11 +14,12 @@ function ProductsCard({ data }) {
   const { addCart, setAddCart } = useContext(cartContext)
   console.log(addCart);
 
+  const { dispatch } = useContext(CartContext);
 
 
-  const addItem = (idMeal, strMealThumb, strMeal, strArea, strInstructions, strCategory , strIngredient1) => {
+  const addItem = (idMeal, strMealThumb, strMeal, strArea, strInstructions, strCategory, strIngredient1) => {
     const obj = {
-      idMeal, strMealThumb, strMeal, strArea, strInstructions, strCategory,strIngredient1
+      idMeal, strMealThumb, strMeal, strArea, strInstructions, strCategory, strIngredient1
     }
     setAddCart([...addCart, obj])
     toast.success('Added to Cart', {
@@ -49,7 +52,7 @@ function ProductsCard({ data }) {
         transition={Bounce}
       />
       <div className='mb-10 '>
-        <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-7 gap-5 place-items-center'>
+        <div className='grid grid-cols-3 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-7 gap-3 place-items-center'>
           {/* Card Section */}
           {
             data.map((data) => (
@@ -63,8 +66,8 @@ function ProductsCard({ data }) {
                       className={`bg-red-600 text-white
                     curser-pointer hover:scale-105 duration-300
                     py-2 px-8 rounded-full relative z-10 `}
-                      onClick={() =>
-                        addItem(data.idMeal, data.strMealThumb, data.strMeal, data.strArea, data.strInstructions, data.strCategory , data.strIngredient1)}
+                      onClick={() => addItem(data.idMeal, data.strMealThumb, data.strMeal, data.strArea, data.strInstructions, data.strCategory , data.strIngredient1)}
+                      // onClick={() => dispatch({ type: "Add", product: data })}
                     >Order</button>
 
                   </div>

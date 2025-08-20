@@ -4,6 +4,7 @@ import { FaShoppingCart } from "react-icons/fa"
 import { Link, useNavigate } from 'react-router-dom'
 import { cartContext } from './cartContext'
 import Button from './Button'
+import { CartContext } from './Features/ContexProvider.jsx'
 
 const MenuLink = [
     {
@@ -30,6 +31,8 @@ const MenuLink = [
 function Navbar() {
 
     //   const {addCart , setAddCart} = useContext(cartContext)
+
+    const { cart, dispatch } = useContext(CartContext);
     const { addCart, setAddCart } = useContext(cartContext)
     const navigate = useNavigate()
 
@@ -93,7 +96,7 @@ function Navbar() {
                         </div>
                         {/* Dark Mode Section */}
                         <button
-                            onClick={() => navigate("/register")}
+                            onClick={() => navigate("/sign-in")}
                             className={` bg-primary text-gray-100
                              curser-pointer hover:scale-105 duration-300
                              py-1 px-6 rounded-full relative z-10 `}
@@ -109,6 +112,7 @@ function Navbar() {
                             <div className='w-4 h-4 bg-red-500 text-white
                                 rounded-full absolute top-0 right-0 flex items-center
                                 justify-center text-xs'>
+                                {/* {cart.length} */}
                                 {addCart.length}
                             </div>
                         </button>
